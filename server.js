@@ -9,9 +9,10 @@ app.listen(port, () => {
     console.log('connect success!');
 });
 
+const logger = require('./middlewares/LogMiddleware');
+app.use(logger);
+
 const router = require('./router');
 Object.keys(router).map(r => {
-    app.use(`/${r}`, router[r], (req, res) => {
-        console.log(res);
-    });
+    app.use(`/${r}`, router[r]);
 });
